@@ -36,13 +36,37 @@ exclude:
   - docker-compose.yaml
   - package.json
   - package-lock.json
+  - Gemfile
+  - Gemfile.lock
   - AGENTS.md
-  - talkmap.py
+  - CHANGELOG
+  - Capfile
+  - config
+  - Gruntfile.js
+  - gulpfile.js
+  - Rakefile
+  - .devcontainer
+  - .github
+  - talkmap
   - talkmap.ipynb
+  - talkmap.py
   - talkmap_out.ipynb
+  - markdown_generator
+  - scripts
+  - assets/js/_main.js
+  - assets/js/plugins
+  - assets/js/vendor
   - node_modules
   - vendor
-  - .github
+  - tmp
+  - log
+  - local
+  - .asset-cache
+  - .jekyll-assets-cache
+  - .sass-cache
+  - .bundle
+  - "*.sublime-project"
+  - "*.sublime-workspace"
 keep_files:
   - .git
   - .svn
