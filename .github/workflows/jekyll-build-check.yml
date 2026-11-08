@@ -18,6 +18,16 @@ jobs:
           bundler-cache: true
           cache-version: 0
       - name: Build with Jekyll
-        run: bundle exec jekyll build --baseurl "/LJT-Homepage"
-        env:
-          JEKYLL_ENV: production
+        run: |
+          set -e
+          bundle exec jekyll build --baseurl "/LJT-Homepage" >/tmp/build.log 2>&1 || { cat /tmp/build.log; exit 1; }
+          echo "=== Generated HTML pages ==="
+          find _site -name "*.html" | sort
+          echo "=== Files mentioning each publication title ==="
+          grep -rEl "SynLogic|Perception Bottleneck|Universal Truthfulness|In-Context Sharpness|C-Eval|Composing Parameter" _site | sort
+          echo "=== Citation count on publications index ==="
+          grep -c "Recommended citation" _site/publications/index.html
+          echo "=== Content presence checks ==="
+          for s in "Zhiyuan Honor Scholarship" "Tencent WXG" "Shanghai AI Lab" "MINIMAX" "Zifei Shan" "Yu Cheng" "Junxian He" "Vision4Chart" "Universal_Truthfulness_Hyperplane" "LLM Reasoning and Reinforcement Learning" "Hallucination in Vision-Language Models" "LLM Truthfulness and Interpretability" "jliugi@connect.ust.hk" "Vicent0205" "tbK9jl4AAAAJ" "junteng88716710" "Professor Junxian He"; do
+            if grep -rq "$s" _site; then echo "FOUND: $s"; else echo "MISSING: $s"; fi
+          done
